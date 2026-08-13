@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HONEYVA | Shoes & Sandals</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+:root{
+  --pink:#ff4f9a; --purple:#7656e8; --dark:#28213b; --cream:#fff7df;
+  --soft:#faf7ff; --text:#665f76; --white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Poppins,sans-serif;
+  color:var(--dark);
+  background:
+    radial-gradient(circle at 8% 10%,#ffd9ea 0,transparent 25%),
+    radial-gradient(circle at 90% 20%,#dcd4ff 0,transparent 25%),
+    linear-gradient(135deg,#fff8fc,#f2f7ff 50%,#fff9e9);
+  min-height:100vh;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+.navbar{
+  position:sticky;top:0;z-index:1000;
+  display:flex;align-items:center;gap:18px;justify-content:space-between;
+  padding:13px 5%;background:rgba(255,255,255,.88);
+  backdrop-filter:blur(18px);box-shadow:0 8px 30px rgba(54,35,80,.12)
+}
+.logo{font-family:"Playfair Display",serif;font-size:31px;font-weight:800;color:var(--pink)}
+.logo span{color:var(--purple)}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.nav-links button{
+  background:transparent;color:#625b73;font-weight:700;padding:10px 13px;border-radius:14px;
+  transition:.25s
+}
+.nav-links button:hover,.nav-links button.active{background:var(--dark);color:white;transform:translateY(-2px)}
+.nav-icon{
+  width:45px;height:45px;border-radius:15px;background:white;
+  box-shadow:0 7px 20px rgba(54,35,80,.13);position:relative;font-size:19px
+}
+.cart-badge{
+  position:absolute;right:-5px;top:-5px;background:var(--pink);color:white;
+  min-width:19px;height:19px;padding:2px 5px;border-radius:20px;font-size:10px;font-weight:800
+}
+.page{display:none;animation:fade .35s ease}.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{
+  width:min(1180px,92%);margin:35px auto 60px;min-height:570px;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px
+}
+.hero-copy{padding:15px}
+.pill{
+  display:inline-block;padding:8px 15px;border-radius:30px;background:#fff;
+  color:var(--pink);font-size:13px;font-weight:800;box-shadow:0 7px 18px rgba(255,79,154,.13)
+}
+.hero h1{
+  font-family:"Playfair Display",serif;font-size:clamp(50px,7vw,88px);
+  line-height:.95;margin:18px 0
+}
+.hero h1 span{color:var(--pink)}
+.hero p{color:var(--text);line-height:1.8;max-width:580px}
+.hero-buttons{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.primary,.secondary{
+  padding:13px 20px;border-radius:16px;font-weight:800;transition:.25s
+}
+.primary{background:linear-gradient(135deg,var(--pink),var(--purple));color:white;box-shadow:0 13px 28px rgba(118,86,232,.25)}
+.secondary{background:white;color:var(--purple);box-shadow:0 9px 22px rgba(54,35,80,.12)}
+.primary:hover,.secondary:hover{transform:translateY(-4px) scale(1.02)}
+.hero-art{min-height:480px;position:relative}
+.blob{
+  position:absolute;inset:35px 5px 20px 20px;
+  background:linear-gradient(135deg,#ffcce4,#d7d0ff,#bff5ef);
+  border-radius:48% 52% 43% 57%/44% 37% 63% 56%;
+  transform:rotate(-7deg);box-shadow:inset 0 0 75px rgba(255,255,255,.55)
+}
+.hero-product{
+  position:absolute;z-index:2;width:80%;left:9%;top:17%;
+  transform:rotate(-10deg);filter:drop-shadow(15px 25px 20px rgba(50,35,70,.28));
+  transition:.4s
+}
+.hero-product:hover{transform:rotate(-6deg) translateY(-10px) scale(1.04)}
+.hero-product img{width:100%;height:330px;object-fit:cover;border-radius:35px}
+.float{
+  position:absolute;z-index:4;background:rgba(255,255,255,.92);padding:12px 16px;
+  border-radius:18px;box-shadow:0 15px 35px rgba(54,35,80,.16);font-weight:800
+}
+.f1{top:35px;left:0}.f2{right:0;top:145px}.f3{bottom:45px;left:15px}
+.section{width:min(1180px,92%);margin:65px auto}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}
+.section h2{font-family:"Playfair Display",serif;font-size:40px}
+.section-head p{color:var(--text)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{
+  background:white;border:1px solid #f0e9f7;padding:25px;border-radius:26px;
+  box-shadow:0 15px 35px rgba(54,35,80,.09);transition:.3s
+}
+.feature:hover{transform:translateY(-7px) rotate(.3deg);box-shadow:0 22px 45px rgba(54,35,80,.15)}
+.feature-icon{font-size:35px;margin-bottom:12px}
+.feature p{color:var(--text);font-size:14px;line-height:1.7;margin-top:6px}
+.collection-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+.search{
+  flex:1;min-width:230px;background:white;padding:7px 14px;border-radius:17px;
+  display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px rgba(54,35,80,.10)
+}
+.search input{border:0;outline:0;width:100%;padding:8px;background:transparent}
+.filter{
+  padding:11px 17px;border-radius:30px;background:white;color:#6b6479;
+  font-weight:700;box-shadow:0 7px 18px rgba(54,35,80,.08)
+}
+.filter.active{background:var(--purple);color:white}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.product{
+  background:white;border-radius:27px;overflow:hidden;border:1px solid #eee6f7;
+  box-shadow:0 14px 35px rgba(54,35,80,.10);transition:.3s
+}
+.product:hover{transform:translateY(-8px);box-shadow:0 24px 45px rgba(54,35,80,.16)}
+.product-image{height:225px;position:relative;overflow:hidden;background:#f7f3fb}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.product:hover img{transform:scale(1.08)}
+.tag{position:absolute;left:12px;top:12px;background:var(--pink);color:white;border-radius:20px;padding:6px 10px;font-size:10px;font-weight:800}
+.product-body{padding:17px}
+.product-body h3{font-size:17px}
+.category{color:#968ea0;font-size:11px;margin-top:3px;text-transform:uppercase}
+.stars{color:#ffb400;font-size:13px;margin:8px 0}
+.price{font-size:20px;font-weight:800;color:var(--purple)}
+.product-actions{display:flex;gap:8px;margin-top:13px}
+.add{flex:1;background:var(--dark);color:white;padding:10px;border-radius:12px;font-weight:800}
+.buy{background:#f1edff;color:var(--purple);padding:10px 12px;border-radius:12px;font-weight:800}
+.card{
+  background:white;border-radius:30px;padding:34px;box-shadow:0 18px 45px rgba(54,35,80,.11)
+}
+.about-grid,.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.about-picture{
+  min-height:360px;border-radius:25px;background:linear-gradient(135deg,#ffcfe5,#d6d0ff,#c1f5ef);
+  display:grid;place-items:center;font-size:120px
+}
+.card p{color:var(--text);line-height:1.8;margin:12px 0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.stat{background:var(--soft);border-radius:18px;padding:17px;text-align:center}
+.stat strong{display:block;color:var(--purple);font-size:25px}
+.info{
+  padding:16px;background:var(--soft);border-radius:18px;margin:10px 0
+}
+.form{display:grid;gap:13px}
+.form input,.form textarea,.form select{
+  width:100%;border:1px solid #e5ddeb;border-radius:14px;padding:13px;outline:0;background:white
+}
+.form textarea{min-height:125px;resize:vertical}
+.cart-page-item,.history-item{
+  display:flex;align-items:center;gap:15px;padding:15px;margin:10px 0;
+  border-radius:19px;background:var(--soft)
+}
+.cart-page-item img{width:80px;height:80px;object-fit:cover;border-radius:15px}
+.item-info{flex:1}
+.qty button{width:30px;height:30px;border-radius:9px;background:white}
+.remove{background:#ffe8f1;color:#e33c78;border-radius:10px;padding:8px}
+.cart-summary{
+  margin-top:20px;padding:22px;border-radius:22px;background:linear-gradient(135deg,#fff0f7,#f0ecff)
+}
+.total-line{display:flex;justify-content:space-between;font-size:22px;font-weight:800;margin-bottom:18px}
+.payment-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.payment-option{
+  padding:15px;background:white;border:2px solid #eee4f6;border-radius:15px;cursor:pointer
+}
+.payment-option:has(input:checked){border-color:var(--purple);background:#f5f1ff}
+.payment-option input{margin-right:8px}
+.history-empty{text-align:center;padding:45px;color:#81798e}
+.history-item{justify-content:space-between}
+footer{background:var(--dark);color:white;text-align:center;padding:30px 5%;margin-top:70px}
+footer span{color:#ff7bb3}
+.toast{
+  position:fixed;z-index:3000;left:50%;bottom:25px;transform:translate(-50%,35px);
+  background:var(--dark);color:white;padding:13px 18px;border-radius:14px;opacity:0;
+  pointer-events:none;transition:.3s
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,1fr)}
+  .features,.about-grid,.contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .navbar{flex-wrap:wrap;justify-content:center}.logo{width:100%;text-align:center}
+  .nav-links{width:100%;overflow:auto;justify-content:flex-start}
+  .nav-links button{white-space:nowrap}
+  .products{grid-template-columns:1fr}.payment-options{grid-template-columns:1fr}
+  .hero h1{font-size:55px}.hero-art{min-height:370px}.hero-product{top:18%}
+  .section h2{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">HONEY<span>VA</span> ✦</div>
+  <nav class="nav-links">
+    <button class="nav-btn active" data-page="home">Home</button>
+    <button class="nav-btn" data-page="collection">Collection</button>
+    <button class="nav-btn" data-page="cart">🛍️ Add to Cart <b id="navCount">0</b></button>
+    <button class="nav-btn" data-page="history">Order History</button>
+    <button class="nav-btn" data-page="about">About Us</button>
+    <button class="nav-btn" data-page="contact">Contact Us</button>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="pill">✨ STEP INTO YOUR STYLE</span>
+      <h1>Walk in <span>Color.</span><br>Live in Style.</h1>
+      <p>Welcome to HONEYVA — a colorful online store for trendy shoes and sandals designed to bring style, comfort, and confidence to every step.</p>
+      <div class="hero-buttons">
+        <button class="primary" onclick="showPage('collection')">Shop Collection →</button>
+        <button class="secondary" onclick="showPage('about')">Discover HONEYVA</button>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="blob"></div>
+      <div class="float f1">💖 Best Seller</div>
+      <div class="float f2">⭐ 4.9/5 Happy Walkers</div>
+      <div class="float f3">🚚 COD Available</div>
+      <div class="hero-product">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85" alt="HONEYVA shoe">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><h2>Why HONEYVA?</h2><p>Our best shopping features.</p></div></div>
+    <div class="features">
+      <div class="feature"><div class="feature-icon">🎨</div><h3>Colorful Collection</h3><p>Fresh shoes and sandals with playful, trendy designs for different styles.</p></div>
+      <div class="feature"><div class="feature-icon">💎</div><h3>Comfort First</h3><p>We combine stylish designs with comfortable choices for everyday use.</p></div>
+      <div class="feature"><div class="feature-icon">⚡</div><h3>Easy Shopping</h3><p>Search products, add them to your separate cart tab, select payment, and order.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="collection" class="page">
+  <div class="section">
+    <div class="section-head"><div><h2>Our Collection</h2><p>Find your next favorite pair.</p></div></div>
+    <div class="collection-toolbar">
+      <div class="search">🔎 <input id="search" oninput="renderProducts()" placeholder="Search shoes, sandals, styles..."></div>
+      <button class="filter active" onclick="setFilter('all',this)">All</button>
+      <button class="filter" onclick="setFilter('shoes',this)">Shoes</button>
+      <button class="filter" onclick="setFilter('sandals',this)">Sandals</button>
+    </div>
+    <div id="products" class="products"></div>
+  </div>
+</section>
+
+<section id="cart" class="page">
+  <div class="section">
+    <div class="card">
+      <div class="section-head">
+        <div><h2>🛍️ Add to Cart</h2><p>Your selected HONEYVA products are shown here.</p></div>
+        <button class="secondary" onclick="showPage('collection')">← Continue Shopping</button>
+      </div>
+      <div id="cartItems"></div>
+      <div id="cartSummary"></div>
+    </div>
+  </div>
+</section>
+
+<section id="history" class="page">
+  <div class="section">
+    <div class="card">
+      <div class="section-head"><div><h2>Order History</h2><p>Your orders are saved in this browser.</p></div></div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="page">
+  <div class="section">
+    <div class="card">
+      <div class="about-grid">
+        <div class="about-picture">👟💗</div>
+        <div>
+          <span class="pill">ABOUT HONEYVA</span>
+          <h2 style="margin-top:15px">Made for every colorful step.</h2>
+          <p>HONEYVA is a creative shoe and sandal store inspired by people who express themselves through fashion. We bring together playful colors, trendy silhouettes, and comfortable everyday choices.</p>
+          <p>Our goal is to make online shopping fun, simple, colorful, and stylish — one pair at a time.</p>
+          <div class="stats">
+            <div class="stat"><strong>8+</strong>Styles</div>
+            <div class="stat"><strong>4.9★</strong>Rating</div>
+            <div class="stat"><strong>2</strong>Payments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="page">
+  <div class="section">
+    <div class="card">
+      <div class="section-head"><div><h2>Contact Us</h2><p>We're happy to hear from you!</p></div></div>
+      <div class="contact-grid">
+        <div>
+          <div class="info">📧 <strong>Email</strong><br>shienaevetoquiro@gmail.com</div>
+          <div class="info">📱 <strong>Contact Number</strong><br>09606661196</div>
+          <div class="info">📍 <strong>Location</strong><br>Philippines</div>
+          <div class="info">🕘 <strong>Customer Support</strong><br>Monday–Saturday, 9:00 AM–6:00 PM</div>
+        </div>
+        <form class="form" id="contactForm">
+          <input required placeholder="Your name">
+          <input required type="email" placeholder="Your email">
+          <input placeholder="Subject">
+          <textarea required placeholder="Write your message..."></textarea>
+          <button class="primary" type="submit">Send Message 💌</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<footer>© 2026 <span>HONEYVA</span> — Shoes & Sandals ✦<br>Step into your style.</footer>
+
+<script>
+const products=[
+{id:1,name:"Pink Bloom Sneakers",cat:"shoes",price:1499,tag:"BEST SELLER",img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85"},
+{id:2,name:"Cloud Walk Sneakers",cat:"shoes",price:1699,tag:"NEW",img:"https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=700&q=85"},
+{id:3,name:"Classic White Kicks",cat:"shoes",price:1299,tag:"POPULAR",img:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=700&q=85"},
+{id:4,name:"Lavender Street Shoes",cat:"shoes",price:1599,tag:"TRENDING",img:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=85"},
+{id:5,name:"Honey Slide Sandals",cat:"sandals",price:799,tag:"SALE",img:"https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=700&q=85"},
+{id:6,name:"Pastel Strap Sandals",cat:"sandals",price:899,tag:"NEW",img:"https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=700&q=85"},
+{id:7,name:"Summer Comfort Slides",cat:"sandals",price:749,tag:"HOT",img:"https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=700&q=85"},
+{id:8,name:"Pearl Platform Sandals",cat:"sandals",price:999,tag:"FAVE",img:"https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?auto=format&fit=crop&w=700&q=85"}
+];
+
+let cart=JSON.parse(localStorage.getItem("honeyvaCart")||"[]");
+let orders=JSON.parse(localStorage.getItem("honeyvaOrders")||"[]");
+let filter="all";
+
+function peso(n){return "₱"+n.toLocaleString("en-PH")}
+function showPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ if(id==="collection")renderProducts();
+ if(id==="cart")renderCart();
+ if(id==="history")renderHistory();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+
+function setFilter(v,btn){
+ filter=v;
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");renderProducts();
+}
+function renderProducts(){
+ const q=(document.getElementById("search")?.value||"").toLowerCase();
+ const list=products.filter(p=>
+  (filter==="all"||p.cat===filter)&&
+  (p.name.toLowerCase().includes(q)||p.cat.includes(q))
+ );
+ document.getElementById("products").innerHTML=list.length?list.map(p=>`
+ <article class="product">
+  <div class="product-image"><img src="${p.img}" alt="${p.name}"><span class="tag">${p.tag}</span></div>
+  <div class="product-body">
+   <h3>${p.name}</h3><div class="category">${p.cat}</div>
+   <div class="stars">★★★★★ <span style="color:#999">(4.9)</span></div>
+   <div class="price">${peso(p.price)}</div>
+   <div class="product-actions">
+    <button class="add" onclick="addToCart(${p.id})">Add to Cart</button>
+    <button class="buy" onclick="addAndOpenCart(${p.id})">⚡ Buy</button>
+   </div>
+  </div>
+ </article>`).join(""):`<div style="grid-column:1/-1;text-align:center;padding:50px;color:#777">No products found. Try another search ✨</div>`;
+}
+
+function addToCart(id){
+ const item=cart.find(x=>x.id===id);
+ if(item)item.qty++;else cart.push({id,qty:1});
+ saveCart();updateCount();toast("Added to your cart! 🛍️");
+}
+function addAndOpenCart(id){addToCart(id);setTimeout(()=>showPage("cart"),150)}
+function saveCart(){localStorage.setItem("honeyvaCart",JSON.stringify(cart))}
+function updateCount(){document.getElementById("navCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
+function changeQty(id,n){
+ const item=cart.find(x=>x.id===id);if(!item)return;
+ item.qty+=n;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);
+ saveCart();updateCount();renderCart();
+}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCount();renderCart()}
+
+function renderCart(){
+ const box=document.getElementById("cartItems"),summary=document.getElementById("cartSummary");
+ if(!cart.length){
+  box.innerHTML='<div class="history-empty">Your cart is empty 💗<br><br><button class="primary" onclick="showPage(\'collection\')">Browse Collection</button></div>';
+  summary.innerHTML="";return;
+ }
+ let total=0;
+ box.innerHTML=cart.map(x=>{
+  const p=products.find(y=>y.id===x.id);total+=p.price*x.qty;
+  return `<div class="cart-page-item">
+   <img src="${p.img}" alt="${p.name}">
+   <div class="item-info"><strong>${p.name}</strong><br><small>${peso(p.price)} each</small></div>
+   <div class="qty"><button onclick="changeQty(${p.id},-1)">−</button> <b>${x.qty}</b> <button onclick="changeQty(${p.id},1)">+</button></div>
+   <strong>${peso(p.price*x.qty)}</strong>
+   <button class="remove" onclick="removeItem(${p.id})">🗑️</button>
+  </div>`;
+ }).join("");
+ summary.innerHTML=`
+ <div class="cart-summary">
+  <div class="total-line"><span>Total</span><span>${peso(total)}</span></div>
+  <h3>Payment Option</h3>
+  <div class="payment-options">
+   <label class="payment-option"><input type="radio" name="payment" value="GCASH" checked> 💙 GCash</label>
+   <label class="payment-option"><input type="radio" name="payment" value="COD"> 💵 Cash on Delivery (COD)</label>
+  </div>
+  <button class="primary" style="width:100%" onclick="checkout()">Place Order ✨</button>
+ </div>`;
+}
+
+function checkout(){
+ if(!cart.length){toast("Your cart is empty!");return}
+ const payment=document.querySelector('input[name="payment"]:checked').value;
+ const total=cart.reduce((sum,x)=>sum+products.find(p=>p.id===x.id).price*x.qty,0);
+ const order={
+  number:"HV-"+Date.now().toString().slice(-6),
+  date:new Date().toLocaleString("en-PH"),
+  payment,total,
+  items:cart.map(x=>({id:x.id,qty:x.qty}))
+ };
+ orders.unshift(order);
+ localStorage.setItem("honeyvaOrders",JSON.stringify(orders));
+ cart=[];saveCart();updateCount();toast("Order placed successfully! 🎉");
+ setTimeout(()=>showPage("history"),600);
+}
+
+function renderHistory(){
+ const box=document.getElementById("historyList");
+ if(!orders.length){
+  box.innerHTML='<div class="history-empty">No orders yet 🌷<br>Your HONEYVA orders will appear here.</div>';return;
+ }
+ box.innerHTML=orders.map(o=>{
+  const names=o.items.map(x=>{
+   const p=products.find(y=>y.id===x.id);return p.name+" × "+x.qty
+  }).join(", ");
+  return `<div class="history-item">
+   <div><strong>${o.number}</strong><br><small>${o.date}<br>${names}</small></div>
+   <div style="text-align:right"><strong>${peso(o.total)}</strong><br><small>${o.payment}</small></div>
+  </div>`;
+ }).join("");
+}
+document.getElementById("contactForm").addEventListener("submit",e=>{
+ e.preventDefault();e.target.reset();toast("Message sent! 💌 Thank you for contacting HONEYVA.");
+});
+function toast(msg){
+ const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),2500);
+}
+renderProducts();updateCount();
+</script>
+</body>
+</html>
